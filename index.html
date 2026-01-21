@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm2Table Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Farm2Table</h1>
+            <nav>
+                <ul>
+                    <li><a href="#farmers">Farmers</a></li>
+                    <li><a href="#restaurants">Restaurants</a></li>
+                    <li><a href="#marketplace">Marketplace</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Directly Connecting Farmers with Restaurants</h2>
+            <p>Fresh produce, fair prices, transparent supply chains.</p>
+            <a href="#marketplace" class="btn">Explore Marketplace</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="feature-cards">
+                <div class="card">
+                    <h3>Real-time Pricing</h3>
+                    <p>Check current produce prices directly from farmers.</p>
+                </div>
+                <div class="card">
+                    <h3>Automated Logistics</h3>
+                    <p>Schedule deliveries and reduce wastage with smart logistics.</p>
+                </div>
+                <div class="card">
+                    <h3>Chatbot Support</h3>
+                    <p>Ask about availability, negotiate, and place orders instantly.</p>
+                </div>
+                <div class="card">
+                    <h3>Payment Integration</h3>
+                    <p>Seamless invoicing and payment directly through the platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketplace Section -->
+    <section id="marketplace" class="marketplace">
+        <div class="container">
+            <h2>Available Produce</h2>
+            <div class="products">
+                <div class="product-card">
+                    <h3>Tomatoes</h3>
+                    <p>Farmer: John Doe</p>
+                    <p>Price: ₹50/kg</p>
+                    <button onclick="placeOrder('Tomatoes','John Doe','50')">Order Now</button>
+                </div>
+                <div class="product-card">
+                    <h3>Carrots</h3>
+                    <p>Farmer: Jane Smith</p>
+                    <p>Price: ₹30/kg</p>
+                    <button onclick="placeOrder('Carrots','Jane Smith','30')">Order Now</button>
+                </div>
+                <div class="product-card">
+                    <h3>Spinach</h3>
+                    <p>Farmer: Ramesh Kumar</p>
+                    <p>Price: ₹25/kg</p>
+                    <button onclick="placeOrder('Spinach','Ramesh Kumar','25')">Order Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Message" rows="4" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Farm2Table. All rights reserved.</p>
+    </footer>
+
+    <!-- Optional JS for chatbot popup -->
+    <script src="script.js"></script>
+</body>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+   (function(){
+      emailjs.init("YOUR_USER_ID"); // get from EmailJS dashboard
+   })();
+
+   const form = document.querySelector('form');
+   form.addEventListener('submit', function(event){
+       event.preventDefault();
+
+       emailjs.sendForm('service_7up8nkp', 'hi', this,'-6KOaU6l3dfTkOvKI')
+       .then(() => {
+           alert('Message sent successfully!');
+           form.reset();
+       }, (error) => {
+           alert('Failed to send message: ' + error.text);
+       });
+   });
+</script>
+<script>
+function placeOrder(product, farmer, price) {
+    const order = {
+        product: product,
+        farmer: farmer,
+        price: price
+    };
+
+    // Store order in browser
+    localStorage.setItem("latestOrder", JSON.stringify(order));
+
+    // Go to orders page
+    window.location.href = "orders.html";
+}
+</script>
+</html>

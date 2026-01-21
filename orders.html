@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Orders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Your Order</h2>
+<div id="orderDetails"></div>
+<form class="checkout-form">
+
+  <h3>Delivery Address</h3>
+  <input type="text" placeholder="Restaurant Name" required>
+  <input type="text" placeholder="Street Address" required>
+  <input type="text" placeholder="City" required>
+  <input type="text" placeholder="Pincode" required>
+  <input type="tel" placeholder="Phone Number" required>
+
+  <h3>Select Payment Mode</h3>
+  <label>
+    <input type="radio" name="payment" required>
+    Cash on Delivery
+  </label><br>
+
+  <label>
+    <input type="radio" name="payment">
+    UPI (Google Pay / PhonePe)
+  </label><br>
+
+  <label>
+    <input type="radio" name="payment">
+    Debit / Credit Card
+  </label><br>
+
+
+<button onclick="placeOrder()">Place Order</button>
+</form>
+<script>
+const order = JSON.parse(localStorage.getItem("latestOrder"));
+
+if(order){
+    document.getElementById("orderDetails").innerHTML = `
+        <p><b>Product:</b> ${order.product}</p>
+        <p><b>Farmer:</b> ${order.farmer}</p>
+        <p><b>Price:</b> ₹${order.price}/kg</p>
+    `;
+}
+</script>
+<script>
+function placeOrder() {
+    alert("✅ Your order has been placed successfully!");
+}
+</script>
+</body>
+</html>
